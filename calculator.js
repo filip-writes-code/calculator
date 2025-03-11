@@ -48,7 +48,8 @@ function operate() {
             operation = divide;
             break;
         };
-    return operation(+firstValue, +secondValue).toString();
+    let result = operation(+firstValue, +secondValue);
+    return result.toString().length > 9 ? result = result.toFixed(3) : result.toString();
 };
 
 function clear() {
