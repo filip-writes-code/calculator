@@ -4,8 +4,7 @@ const operatorButtons = document.querySelectorAll('.operator');
 const clearButton = document.querySelector('#clear');
 const reverseButton = document.querySelector('#reverse');
 const percentageButton = document.querySelector('#percentage');
-
-
+const dotButton = document.querySelector('#\\.')
 
 let firstValue = '';
 let secondValue = '';
@@ -67,7 +66,16 @@ function makePercentage() {
     };
 }
 
+function toggleDotDisable () {
+    dotButton.toggleAttribute('disabled');
+    return dotButton.disabled;
+}
+
 function numberClicked(number) {
+    if (operatorValue === '=') {
+        clear();
+    }
+
     if (!operatorValue) {
         firstValue += number;
         refreshDisplay(firstValue);
@@ -88,9 +96,10 @@ function operatorClicked(operation) {
         }
 
     operatorValue = operation;
+
     if (operatorValue === '=') {
-        firstValue = '';
-        operatorValue = '';
+        // firstValue = '';
+        // operatorValue = '';
     }
 
     console.log(firstValue, secondValue, operatorValue);
