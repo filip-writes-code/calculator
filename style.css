@@ -57,6 +57,15 @@ button {
     font-size: 24px;
 }
 
+.number:active,
+.control:active {
+    background-color: #d4d4d2;
+}
+
 .operator {
     background-color: #FF9500;
+}
+
+.operator:active {
+    background-color: #ffce8a;
 }
