@@ -137,3 +137,8 @@ clearButton.addEventListener('click', () => clear());
 reverseButton.addEventListener('click', () => positiveNegativeSwitch());
 percentageButton.addEventListener('click', () => makePercentage());
 backspaceButton.addEventListener('click', () => backspace());
+window.addEventListener('keydown', (event) => {
+    console.log(event.key)
+    const correspondingButton = document.querySelector(`button[key='${event.key}']`);
+    correspondingButton ? correspondingButton.click() : false;
+})
