@@ -46,27 +46,6 @@ function refreshDisplay(input) {
     display.innerText = input;
 };
 
-function numberClicked(number) {
-    if (!operatorValue) {
-        firstValue += number;
-        refreshDisplay(firstValue);
-    } else {
-        secondValue += number;
-        refreshDisplay(secondValue);
-    };
-};
-
-function operatorClicked(operation) {
-    if (firstValue && operatorValue && secondValue) 
-        {
-        const result = operate();
-        refreshDisplay(result);
-        firstValue = result;
-        secondValue = '';
-        }
-
-    operatorValue = operation;
-};
 
 function positiveNegativeSwitch() {
     if (!operatorValue) {
@@ -87,6 +66,35 @@ function makePercentage() {
         refreshDisplay(secondValue);
     };
 }
+
+function numberClicked(number) {
+    if (!operatorValue) {
+        firstValue += number;
+        refreshDisplay(firstValue);
+    } else {
+        secondValue += number;
+        refreshDisplay(secondValue);
+    };
+    console.log(firstValue, secondValue, operatorValue);
+};
+
+function operatorClicked(operation) {
+    if (firstValue && operatorValue && secondValue) 
+        {
+        const result = operate();
+        refreshDisplay(result);
+        firstValue = result;
+        secondValue = '';
+        }
+
+    operatorValue = operation;
+    if (operatorValue === '=') {
+        firstValue = '';
+        operatorValue = '';
+    }
+
+    console.log(firstValue, secondValue, operatorValue);
+};
 
 numberButtons.forEach(button => button.addEventListener('click', () => numberClicked(button.id)));
 operatorButtons.forEach(button => button.addEventListener('click', () => operatorClicked(button.id)));
