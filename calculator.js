@@ -4,7 +4,8 @@ const operatorButtons = document.querySelectorAll('.operator');
 const clearButton = document.querySelector('#clear');
 const reverseButton = document.querySelector('#reverse');
 const percentageButton = document.querySelector('#percentage');
-const dotButton = document.querySelector('#\\.')
+const dotButton = document.querySelector('#\\.');
+const backspaceButton = document.querySelector('#backspace');
 
 let firstValue = '';
 let secondValue = '';
@@ -46,7 +47,10 @@ function hasDecimals (value) {
 };
 
 function refreshDisplay(input) {
-    display.innerText = input;
+    if (input === '') {
+        display.innerText = '0'}
+    else {
+    display.innerText = input;}
 };
 
 
@@ -68,7 +72,18 @@ function makePercentage() {
         secondValue = (+secondValue / 100).toString();
         refreshDisplay(secondValue);
     };
-}
+};
+
+function backspace() {
+    if (!operatorValue) { 
+            firstValue = firstValue.slice(0, -1);
+            refreshDisplay(firstValue);
+    } else {
+        secondValue = secondValue.slice(0, -1);
+        refreshDisplay(secondValue);
+    };
+    hasDecimals(display.innerText) ? dotButton.disabled = true : dotButton.disabled = false;
+};
 
 function numberClicked(number) {
     if (operatorValue === '=') {
@@ -106,3 +121,4 @@ operatorButtons.forEach(button => button.addEventListener('click', () => operato
 clearButton.addEventListener('click', () => clear());
 reverseButton.addEventListener('click', () => positiveNegativeSwitch());
 percentageButton.addEventListener('click', () => makePercentage());
+backspaceButton.addEventListener('click', () => backspace());
