@@ -14,7 +14,23 @@ let operatorValue = '';
 function add (a, b) {return a + b;};
 function subtract (a, b) {return a - b;};
 function multiply(a, b) {return a * b;};
-function divide(a, b) {return a / b;};
+function divide(a, b) {
+    if (b == 0) {
+        disableAllButtonsButClear();
+        return 'ERROR';}
+    else {
+    return a / b;}};
+
+function disableAllButtonsButClear() {
+    const allButtons = document.querySelectorAll('button');
+    allButtons.forEach(button => button.disabled = true);
+    clearButton.disabled = false;
+};
+
+function enableAllButtons () {
+    const allButtons = document.querySelectorAll('button');
+    allButtons.forEach(button => button.disabled = false);
+}
 
 function operate() {
     let operation;
@@ -39,6 +55,7 @@ function clear() {
         firstValue = '';
         secondValue = '';
         operatorValue = '';
+        enableAllButtons();
         refreshDisplay(0);
 };
 
@@ -52,7 +69,6 @@ function refreshDisplay(input) {
     else {
     display.innerText = input;}
 };
-
 
 function positiveNegativeSwitch() {
     if (!operatorValue) {
@@ -99,7 +115,6 @@ function numberClicked(number) {
     };
 
     hasDecimals(display.innerText) ? dotButton.disabled = true : dotButton.disabled = false;
-    console.log(firstValue, secondValue, operatorValue);
 };
 
 function operatorClicked(operation) {
@@ -113,7 +128,6 @@ function operatorClicked(operation) {
         }
 
     operatorValue = operation;
-    console.log(firstValue, secondValue, operatorValue);
 };
 
 numberButtons.forEach(button => button.addEventListener('click', () => numberClicked(button.id)));
