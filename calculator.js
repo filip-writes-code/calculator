@@ -41,6 +41,10 @@ function clear() {
         refreshDisplay(0);
 };
 
+function hasDecimals (value) {
+    return value.includes('.') ? true : false;
+};
+
 function refreshDisplay(input) {
     display.innerText = input;
 };
@@ -66,11 +70,6 @@ function makePercentage() {
     };
 }
 
-function toggleDotDisable () {
-    dotButton.toggleAttribute('disabled');
-    return dotButton.disabled;
-}
-
 function numberClicked(number) {
     if (operatorValue === '=') {
         clear();
@@ -83,10 +82,13 @@ function numberClicked(number) {
         secondValue += number;
         refreshDisplay(secondValue);
     };
+
+    hasDecimals(display.innerText) ? dotButton.disabled = true : dotButton.disabled = false;
     console.log(firstValue, secondValue, operatorValue);
 };
 
 function operatorClicked(operation) {
+    dotButton.disabled = false;
     if (firstValue && operatorValue && secondValue) 
         {
         const result = operate();
@@ -96,12 +98,6 @@ function operatorClicked(operation) {
         }
 
     operatorValue = operation;
-
-    if (operatorValue === '=') {
-        // firstValue = '';
-        // operatorValue = '';
-    }
-
     console.log(firstValue, secondValue, operatorValue);
 };
 
